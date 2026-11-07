@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import createHandler from "../../extension/background/create-handler.mjs";
-import registerListeners from "../../extension/background/register-listeners.mjs";
+import registerMessageListener from "../../extension/background/register-message-listener.mjs";
 import config from "../support/config.mjs";
 import fakeBrowser from "../support/fake-browser.mjs";
 
@@ -182,7 +182,7 @@ test("the message listener returns history results and readable errors", async (
   ];
   const browser = fakeBrowser(history);
 
-  registerListeners(browser, createHandler(browser, config), config.startPage);
+  registerMessageListener(browser, createHandler(browser, config));
 
   const request = (message) =>
     new Promise((resolve) => {
@@ -208,6 +208,4 @@ test("the message listener returns history results and readable errors", async (
       error: "Unknown action",
     },
   );
-  browser.listeners.command("open");
-  assert.equal(browser.calls.at(-1).url, config.startPage);
 });

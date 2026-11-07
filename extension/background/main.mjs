@@ -1,5 +1,5 @@
 import config from "../config.mjs";
 import createHandler from "./create-handler.mjs";
-import registerListeners from "./register-listeners.mjs";
+import registerMessageListener from "./register-message-listener.mjs";
 
-registerListeners(chrome, createHandler(chrome, config), config.startPage);
+registerMessageListener(chrome, createHandler(chrome, config));

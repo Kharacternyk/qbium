@@ -13,13 +13,6 @@ export default function fakeBrowser(historyItems = []) {
         },
       },
     },
-    commands: {
-      onCommand: {
-        addListener: (listener) => {
-          listeners.command = listener;
-        },
-      },
-    },
     windows: {
       create: async (options) => {
         calls.push({
