@@ -1,6 +1,6 @@
 import surfaceStylesheet from "./surface-stylesheet.mjs";
 
-export default function createSurface(runtime, styles = []) {
+export default function createSurface(styles = []) {
   const host = document.createElement("div");
   const root = host.attachShadow({
     mode: "closed",
@@ -8,16 +8,8 @@ export default function createSurface(runtime, styles = []) {
 
   root.adoptedStyleSheets = [
     surfaceStylesheet,
+    ...styles,
   ];
-
-  for (const path of styles) {
-    const link = document.createElement("link");
-
-    link.rel = "stylesheet";
-    link.href = runtime.getURL(path);
-
-    root.append(link);
-  }
 
   document.documentElement.append(host);
 

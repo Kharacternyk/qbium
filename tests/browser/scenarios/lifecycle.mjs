@@ -5,6 +5,16 @@ export default async function lifecycle(page, { browser, origin, t }) {
   await page.evaluate(`document.head.append(Object.assign(document.createElement("style"), {
     textContent: "html > div { pointer-events: auto !important; position: static !important; z-index: -1 !important; }",
   }))`);
+  // Opening the prompt must not depend on another stylesheet request.
+  await page.call("Network.enable");
+  await page.call("Network.setCacheDisabled", {
+    cacheDisabled: true,
+  });
+  await page.call("Network.setBlockedURLs", {
+    urls: [
+      "*content/prompt/styles.css",
+    ],
+  });
   await page.key("o");
   assert.deepEqual(
     await page.evaluate(`Object.fromEntries(
@@ -30,16 +40,17 @@ export default async function lifecycle(page, { browser, origin, t }) {
     backendNodeId: input.backendDOMNodeId,
   });
 
-  await until(async () => {
-    const { result } = await page.call("Runtime.callFunctionOn", {
-      objectId: object.objectId,
-      functionDeclaration:
-        "function() { return getComputedStyle(this).backgroundColor; }",
-      returnByValue: true,
-    });
+  const { result } = await page.call("Runtime.callFunctionOn", {
+    objectId: object.objectId,
+    functionDeclaration:
+      "function() { return getComputedStyle(this).backgroundColor; }",
+    returnByValue: true,
+  });
 
-    return result.value === "rgb(34, 34, 34)";
-  }, "Prompt stylesheet did not load");
+  assert.equal(result.value, "rgb(34, 34, 34)");
+  await page.call("Network.setBlockedURLs", {
+    urls: [],
+  });
 
   // A prompt survives focus loss with its draft intact.
   const other = await browser.newPage(origin + "/other");

@@ -2,6 +2,7 @@ import createSurface from "../ui/create-surface.mjs";
 import Completion from "./completion.mjs";
 import Selection from "./selection.mjs";
 import selectionDirection from "./selection-direction.mjs";
+import stylesheet from "./stylesheet.mjs";
 import PromptView from "./view.mjs";
 
 export default class PromptSession {
@@ -16,7 +17,6 @@ export default class PromptSession {
   #target;
 
   constructor({
-    runtime,
     searchHistory,
     onSubmit,
     onClose,
@@ -27,8 +27,8 @@ export default class PromptSession {
     this.#onSubmit = onSubmit;
     this.#onClose = onClose;
     this.#target = target;
-    this.#surface = createSurface(runtime, [
-      "content/prompt/styles.css",
+    this.#surface = createSurface([
+      stylesheet,
     ]);
     this.#view = new PromptView(this.#surface.root, {
       target,

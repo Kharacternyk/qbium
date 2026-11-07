@@ -1,6 +1,7 @@
 import generateHintCodes from "../../shared/generate-hint-codes.mjs";
 import createSurface from "../ui/create-surface.mjs";
 import createLabel from "./create-label.mjs";
+import stylesheet from "./stylesheet.mjs";
 
 export default class HintSession {
   kind = "hints";
@@ -12,15 +13,15 @@ export default class HintSession {
   #onClose;
   #onOpen;
 
-  constructor(candidates, { runtime, alphabet, target, onClose, onOpen }) {
+  constructor(candidates, { alphabet, target, onClose, onOpen }) {
     const codes = generateHintCodes(candidates.length, alphabet);
 
     this.#alphabet = alphabet;
     this.#target = target;
     this.#onClose = onClose;
     this.#onOpen = onOpen;
-    this.#surface = createSurface(runtime, [
-      "content/hints/styles.css",
+    this.#surface = createSurface([
+      stylesheet,
     ]);
     this.#hints = candidates.map((element, index) =>
       createLabel(this.#surface.root, element, codes[index]),

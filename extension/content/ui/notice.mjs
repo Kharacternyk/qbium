@@ -1,8 +1,8 @@
 import createSurface from "./create-surface.mjs";
 import element from "./element.mjs";
 
-export default function createNotice({ runtime, text, onClose }) {
-  const surface = createSurface(runtime);
+export default function createNotice({ text, onClose }) {
+  const surface = createSurface();
 
   surface.root.append(
     element("div", {

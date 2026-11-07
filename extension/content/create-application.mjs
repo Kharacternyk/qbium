@@ -18,7 +18,6 @@ export default function createApplication(runtime, config) {
   const showNotice = (text) =>
     controller.activate(() =>
       createNotice({
-        runtime,
         text,
         onClose: () => controller.reset(),
       }),
@@ -44,7 +43,6 @@ export default function createApplication(runtime, config) {
         () =>
           new PromptSession({
             ...options,
-            runtime,
             searchHistory: (query) => browser.searchHistory(query),
             onSubmit: open,
             onClose: () => controller.reset(),
@@ -53,7 +51,6 @@ export default function createApplication(runtime, config) {
     startHints(target) {
       const session = controller.activate(() =>
         createHintSession({
-          runtime,
           target,
           alphabet: config.hintKeys,
           onClose: () => controller.reset(),
