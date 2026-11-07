@@ -1,0 +1,44 @@
+input {
+  background: #222;
+  border: 0;
+  color: #eee;
+  outline: none;
+  width: 100%;
+}
+
+.history {
+  margin-bottom: 8px;
+  max-height: 40vh;
+  overflow-y: auto;
+}
+
+.history:empty {
+  display: none;
+}
+
+.history-option {
+  cursor: pointer;
+  padding: 5px 8px;
+}
+
+.history-option[aria-selected="true"] {
+  background: #504537;
+  color: #ffe082;
+}
+
+.history-title,
+.history-url {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.history-url,
+.history-status {
+  color: #aaa;
+  font-size: 13px;
+}
+
+.history-status {
+  padding-bottom: 6px;
+}

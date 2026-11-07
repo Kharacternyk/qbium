@@ -1,0 +1,24 @@
+:host {
+  all: initial !important;
+  inset: 0 !important;
+  pointer-events: none !important;
+  position: fixed !important;
+  z-index: 2147483647 !important;
+}
+
+* {
+  box-sizing: border-box;
+  font: 16px monospace;
+}
+
+.bar {
+  background: #222;
+  border-top: 2px solid #d8a657;
+  bottom: 0;
+  color: #eee;
+  left: 0;
+  padding: 10px;
+  pointer-events: auto;
+  position: fixed;
+  width: 100%;
+}

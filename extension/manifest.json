@@ -4,10 +4,12 @@
   "version": "0.1.0",
   "description": "Local qutebrowser-style navigation.",
   "permissions": [
-    "clipboardWrite"
+    "clipboardWrite",
+    "history"
   ],
   "background": {
-    "service_worker": "background.js"
+    "service_worker": "background/main.mjs",
+    "type": "module"
   },
   "content_scripts": [
     {
@@ -16,11 +18,23 @@
         "https://*/*"
       ],
       "js": [
-        "config.js",
-        "content.js"
+        "content/bootstrap.js"
       ],
       "all_frames": true,
       "run_at": "document_start"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "content/*",
+        "shared/*",
+        "config.mjs"
+      ],
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ]
     }
   ],
   "commands": {

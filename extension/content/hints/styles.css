@@ -1,0 +1,14 @@
+.label {
+  background: #ffe082;
+  border: 1px solid #222;
+  border-radius: 2px;
+  color: #111;
+  font-weight: bold;
+  padding: 1px 3px;
+  position: fixed;
+}
+
+.label .matched {
+  color: #16752b;
+  font: inherit;
+}

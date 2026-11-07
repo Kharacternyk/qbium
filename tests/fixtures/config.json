@@ -1,0 +1,6 @@
+{
+  "startPage": "https://example.org/start",
+  "searchUrl": "https://example.org/search?q=",
+  "hintKeys": "asdfghjkl",
+  "scrollStep": 120
+}
