@@ -1,3 +1,4 @@
-import loadStylesheet from "./load-stylesheet.mjs";
+import createStylesheet from "./create-stylesheet.mjs";
+import css from "./surface.css";
 
-export default await loadStylesheet(new URL("./surface.css", import.meta.url));
+export default createStylesheet(css);

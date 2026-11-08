@@ -1,3 +1,4 @@
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
@@ -25,6 +26,14 @@ export default function createExtension(t) {
     path.join(directory, "config.mjs"),
     `export default Object.freeze(${JSON.stringify(config)});\n`,
   );
+
+  execFileSync(process.env.ESBUILD || "esbuild", [
+    path.join(directory, "content/main.mjs"),
+    "--bundle",
+    "--format=iife",
+    "--loader:.css=text",
+    `--outfile=${path.join(directory, "content/main.js")}`,
+  ]);
 
   return directory;
 }

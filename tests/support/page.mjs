@@ -28,34 +28,6 @@ export default class Page {
   async ready() {
     await until(() => this.evaluate("document.readyState === 'complete'"));
     await this.call("Page.bringToFront");
-    // Wait for the native module loader in the extension's isolated world.
-    await until(async () => {
-      const contexts = this.protocol.events.filter(
-        (event) =>
-          event.sessionId === this.sessionId &&
-          event.method === "Runtime.executionContextCreated" &&
-          event.params.context.origin.startsWith("chrome-extension://"),
-      );
-      const context = contexts.at(-1)?.params.context;
-
-      if (!context) {
-        return false;
-      }
-
-      try {
-        const result = await this.call("Runtime.evaluate", {
-          expression:
-            'import(chrome.runtime.getURL("content/main.mjs")).then(() => true)',
-          contextId: context.id,
-          awaitPromise: true,
-          returnByValue: true,
-        });
-
-        return result.result?.value === true;
-      } catch {
-        return false;
-      }
-    }, "Extension content modules did not load");
   }
 
   async navigate(url) {

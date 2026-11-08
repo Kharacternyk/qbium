@@ -18,23 +18,10 @@
         "https://*/*"
       ],
       "js": [
-        "content/bootstrap.js"
+        "content/main.js"
       ],
       "all_frames": true,
       "run_at": "document_start"
-    }
-  ],
-  "web_accessible_resources": [
-    {
-      "resources": [
-        "content/*",
-        "shared/*",
-        "config.mjs"
-      ],
-      "matches": [
-        "http://*/*",
-        "https://*/*"
-      ]
     }
   ],
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAkqVyF6RmjTfjvv4w6LDVGD2nBsD9tS0Yfrqklfxoiq/64urBApdq2/LYrHUuDPvM3oCEPvrSNitUtc+iLRfa34j78F9I2xPWyuyGR8Kp9rSUbHBrB3hfjAlVCCKp2s0DRfN/cEiIJY+12w0l5YHQy25XjN26gPfkZgwPPz01uH+iLiucIxaeBxi4vBZdLHYIkIZRqGvQsXWNnXm6zjwlJwrl+FIYzMtRS4/LoLDtImJQOBJCLVUwAIDKMVrWDOunrr+1A4OSSSsdO3Ll/EVL5zgcfwppXYJqTmZ2DE7q8yI3w7vpNkuhk0Oo0s9LRmLOVP2XHWiEBQb3t11a96UohQIDAQAB"

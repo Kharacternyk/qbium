@@ -1,3 +1,4 @@
-import loadStylesheet from "../ui/load-stylesheet.mjs";
+import createStylesheet from "../ui/create-stylesheet.mjs";
+import css from "./styles.css";
 
-export default await loadStylesheet(new URL("./styles.css", import.meta.url));
+export default createStylesheet(css);

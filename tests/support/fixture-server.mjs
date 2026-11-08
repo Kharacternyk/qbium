@@ -6,7 +6,19 @@ export default async function createFixtureServer(t) {
     "/history-two": "Fuzzy History Handbook",
   };
   const server = http.createServer((request, response) => {
+    if (request.url === "/pending.js") {
+      return;
+    }
+
     response.setHeader("Content-Type", "text/html");
+
+    if (request.url === "/slow-page") {
+      response.end(`<!doctype html><title>Startup fixture</title>
+        <body><script src="/pending.js"></script>`);
+
+      return;
+    }
+
     response.end(`<!doctype html><title>${titles[request.url] || "Keyboard fixture"}</title>
       <style>body{height:4000px}a{display:inline-block;margin:8px}</style>
       <input id="input"><button onclick="document.body.dataset.clicked='yes'">Click</button>

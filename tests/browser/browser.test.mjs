@@ -7,6 +7,7 @@ import history from "./scenarios/history.mjs";
 import keyboard from "./scenarios/keyboard.mjs";
 import lifecycle from "./scenarios/lifecycle.mjs";
 import navigation from "./scenarios/navigation.mjs";
+import startup from "./scenarios/startup.mjs";
 
 test("Chromium integration", {
   timeout: 60000,
@@ -15,6 +16,7 @@ test("Chromium integration", {
   const browser = await launchBrowser(t);
 
   for (const scenario of [
+    startup,
     keyboard,
     navigation,
     hints,

@@ -1,5 +1,6 @@
 {
   config,
+  esbuild,
   lib,
   stdenvNoCC,
   writeText,
@@ -10,6 +11,15 @@ let
   '';
 in
 stdenvNoCC.mkDerivation {
+  buildPhase = ''
+    runHook preBuild
+    esbuild extension/content/main.mjs \
+      --bundle \
+      --format=iife \
+      --loader:.css=text \
+      --outfile=extension/content/main.js
+    runHook postBuild
+  '';
   installPhase = ''
     runHook preInstall
     mkdir -p "$out"
@@ -21,6 +31,9 @@ stdenvNoCC.mkDerivation {
     homepage = "https://github.com/Kharacternyk/qbium";
     platforms = lib.platforms.all;
   };
+  nativeBuildInputs = [
+    esbuild
+  ];
   pname = "qbium";
   postPatch = ''
     cp ${configuredScript} extension/config.mjs
