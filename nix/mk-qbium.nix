@@ -14,8 +14,7 @@ let
       startPage
       ;
   };
-  package = pkgs.callPackage ./package.nix {
-    inherit config;
-  };
 in
-builtins.deepSeq config package
+pkgs.callPackage ./package.nix {
+  inherit config;
+}
